@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SQL 연산자 문제 5문항</title>
+<style>
+:root{--bg:#f3f5f8;--card:#fff;--ink:#17233a;--sub:#5b6778;--line:#d9dfe8;--acc:#0b6e66;--accbg:#e3f3f1;--code:#13202f;--codeink:#d8e6f3;--ok:#1b7a3d;--no:#b3261e;--okbg:#e5f4ea;--nobg:#fbe8e6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1722;--card:#17212f;--ink:#e6edf6;--sub:#9aa7b8;--line:#2b384a;--acc:#4fd1c5;--accbg:#173431;--code:#0a111a;--codeink:#cfe0f0;--ok:#6fdc97;--no:#ff8a80;--okbg:#14301f;--nobg:#3a1d1b}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+main{max-width:720px;margin:0 auto;padding:28px 16px 60px}
+h1{font-size:1.6rem;margin:0 0 6px;letter-spacing:-.02em}
+.lead{color:var(--sub);margin:0 0 22px}
+.scroll{overflow-x:auto;margin:0 0 26px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;white-space:nowrap}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--accbg);color:var(--acc);font-weight:600}
+tr:last-child td{border-bottom:0}
+.q{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:8px;padding:18px 18px 16px;margin:0 0 18px}
+.q h2{font-size:1.05rem;margin:0 0 4px}
+.tag{display:inline-block;font-size:.8rem;color:var(--acc);background:var(--accbg);border-radius:4px;padding:1px 8px;margin-left:6px;font-weight:600}
+.q p{margin:6px 0 12px}
+textarea{width:100%;min-height:96px;font:.9rem/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--code);color:var(--codeink);border:1px solid var(--line);border-radius:6px;padding:10px;resize:vertical}
+button{font:inherit;font-weight:600;cursor:pointer;border-radius:6px;border:1px solid var(--acc);background:var(--acc);color:#fff;padding:8px 16px;margin-top:10px;min-height:40px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button{color:#06201d}}
+button.ghost{background:transparent;color:var(--acc)}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.ans{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+summary{cursor:pointer;font-weight:600;color:var(--acc);padding:8px 0;min-height:40px}
+summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+pre{margin:8px 0;background:var(--code);color:var(--codeink);padding:12px;border-radius:6px;overflow-x:auto;font:.88rem/1.55 ui-monospace,Menlo,Consolas,monospace}
+.opt{padding:8px 12px;border-radius:6px;border:1px solid var(--line);margin:8px 0 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem}
+.opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.opt.no{background:var(--nobg);border-color:var(--no);color:var(--no)}
+.note{color:var(--sub);font-size:.92rem}
+</style>
+</head>
+<body>
+<main>
+<h1>SQL 연산자 문제 5문항</h1>
+<p class="lead">아래 Employees 테이블을 기준으로 쿼리를 작성해 보세요. 직접 써 본 뒤 정답을 확인하면 됩니다.</p>
+
+<div class="scroll"><table>
+<thead><tr><th>employee_id</th><th>first_name</th><th>last_name</th><th>department</th><th>salary</th><th>bonus</th></tr></thead>
+<tbody>
+<tr><td>101</td><td>영수</td><td>김</td><td>영업부</td><td>60000</td><td>5000</td></tr>
+<tr><td>102</td><td>미나</td><td>이</td><td>마케팅</td><td>55000</td><td>3000</td></tr>
+<tr><td>103</td><td>준호</td><td>박</td><td>개발팀</td><td>65000</td><td>4000</td></tr>
+<tr><td>104</td><td>지현</td><td>최</td><td>영업부</td><td>58000</td><td>4500</td></tr>
+<tr><td>105</td><td>민우</td><td>정</td><td>인사부</td><td>52000</td><td>2500</td></tr>
+</tbody></table></div>
+
+<section class="q">
+<h2>Q1<span class="tag">산술연산자</span></h2>
+<p>각 직원의 <code>first_name</code>과 연봉(salary × 12)에 보너스를 더한 값을 <code>annual_total</code>로 조회하는 쿼리를 작성하시오.</p>
+<textarea aria-label="Q1 답안" spellcheck="false" placeholder="SELECT ..."></textarea>
+<details class="ans"><summary>정답 확인</summary>
+<pre>SELECT first_name, salary * 12 + bonus AS annual_total
+FROM Employees;</pre>
+<p>결과: 725000, 663000, 784000, 700500, 626500 (영수, 미나, 준호, 지현, 민우 순)</p>
+<p class="note">* 가 + 보다 우선순위가 높아 괄호가 필요 없습니다.</p>
+</details>
+</section>
+
+<section class="q">
+<h2>Q2<span class="tag">비교 + 논리연산자</span></h2>
+<p>영업부가 아니면서 급여가 55000 이상인 직원의 <code>first_name</code>, <code>last_name</code>을 조회하는 쿼리를 작성하고, 결과를 쓰시오.</p>
+<textarea aria-label="Q2 답안" spellcheck="false" placeholder="SELECT ..."></textarea>
+<details class="ans"><summary>정답 확인</summary>
+<pre>SELECT first_name, last_name
+FROM Employees
+WHERE department &lt;&gt; '영업부' AND salary &gt;= 55000;</pre>
+<p>결과: 미나 이(55000), 준호 박(65000)</p>
+<p class="note">&gt;= 는 경계값을 포함하므로 급여가 55000인 미나도 조회됩니다.</p>
+</details>
+</section>
+
+<section class="q">
+<h2>Q3<span class="tag">LIKE</span></h2>
+<p><code>first_name</code>이 '민'으로 시작하는 정확히 두 글자 이름을 가진 직원을 조회하는 쿼리를 작성하시오.</p>
+<textarea aria-label="Q3 답안" spellcheck="false" placeholder="SELECT ..."></textarea>
+<details class="ans"><summary>정답 확인</summary>
+<pre>SELECT employee_id, first_name, last_name
+FROM Employees
+WHERE first_name LIKE '민_';</pre>
+<p>결과: 105, 민우, 정</p>
+<p class="note">_ 는 정확히 1글자, % 는 0글자 이상을 대체합니다.</p>
+</details>
+</section>
+
+<section class="q">
+<h2>Q4<span class="tag">IN + BETWEEN</span></h2>
+<p>부서가 영업부 또는 마케팅이면서 보너스가 3000 이상 4500 이하인 직원의 <code>employee_id</code>를 조회하는 쿼리를 작성하고, 결과를 쓰시오.</p>
+<textarea aria-label="Q4 답안" spellcheck="false" placeholder="SELECT ..."></textarea>
+<details class="ans"><summary>정답 확인</summary>
+<pre>SELECT employee_id
+FROM Employees
+WHERE department IN ('영업부', '마케팅')
+  AND bonus BETWEEN 3000 AND 4500;</pre>
+<p>결과: 102, 104</p>
+<p class="note">BETWEEN은 양 끝값을 포함합니다. 보너스가 5000인 101은 범위 밖이라 제외됩니다.</p>
+</details>
+</section>
+
+<section class="q">
+<h2>Q5<span class="tag">IS NULL</span></h2>
+<p>보너스가 NULL인 직원을 찾는 올바른 조건을 고르시오.</p>
+<div id="opts">
+<div class="opt">① WHERE bonus = NULL</div>
+<div class="opt">② WHERE bonus IS NULL</div>
+<div class="opt">③ WHERE bonus &lt;&gt; NULL</div>
+<div class="opt">④ WHERE bonus == NULL</div>
+</div>
+<details class="ans"><summary>정답 확인</summary>
+<p>정답은 ②입니다. NULL은 '알 수 없는 값'이라 =, &lt;&gt; 같은 일반 비교연산자로는 판별할 수 없고 결과가 UNKNOWN이 됩니다. 그래서 IS NULL 또는 IS NOT NULL을 사용해야 합니다.</p>
+</details>
+</section>
+</main>
+
+</body>
+</html>
